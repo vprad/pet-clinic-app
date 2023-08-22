@@ -7,6 +7,9 @@ WORKDIR /app
 # Copy the Maven project files into the container
 COPY . /app
 
+# Make the mvnw script executable
+RUN chmod +x ./mvnw
+
 # Run Maven to download dependencies and build the application
 RUN ./mvnw clean package -DskipTests
 
