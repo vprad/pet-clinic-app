@@ -5,16 +5,10 @@ FROM openjdk:8-jdk-alpine
 WORKDIR /app
 
 # Copy the Maven project files into the container
-COPY pom.xml .
+COPY . /app
 
-# Run the Maven build to download dependencies
-RUN ./mvnw dependency:go-offline -B
-
-# Copy the application source code into the container
-COPY src/ /app/src/
-
-# Build the application
-RUN ./mvnw package -DskipTests
+# Run Maven to download dependencies and build the application
+RUN ./mvnw clean package -DskipTests
 
 # Expose the port that the Spring Boot application will run on
 EXPOSE 8080
